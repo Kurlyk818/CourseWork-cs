@@ -36,16 +36,15 @@
 
 1. **Клонування репозиторію:**
    ```bash
-   git clone <repository>
+   git clone https://github.com/Kurlyk818/CourseWork-cs.git
 
     
-
 Use code with caution.Markdown
 
     Перехід до папки проекту:
 
           
-    cd <directory_name>
+    cd CourseWork-cs
 
         
 
@@ -56,17 +55,12 @@ Use code with caution.Bash
       
 dotnet restore
 
-    
-
-Use code with caution.Bash
 
 Збірка проекту:
 
       
 dotnet publish -c Release -o bin/Release/net6.0
 
-    
-Use code with caution.Bash
 
 Запуск проекту:
 
@@ -75,7 +69,7 @@ dotnet run
 
 Автор:
 
-    [Барановський Олександр]
+    Барановський Олександр
 
 Додаткові можливості:
 

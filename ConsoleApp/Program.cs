@@ -216,43 +216,54 @@ namespace ConsoleApp
             }
         }
 
-        static void AddProduct()
-        {
-            DisplayCategories();
-            Console.Write("Введіть ID категорії для товару: ");
-            int categoryId = GetIntInput();
-            Category category = dataStorage.Categories.FirstOrDefault(c => c.Id == categoryId);
+      static void AddProduct()
+{
+    DisplayCategories();
+    Console.Write("Введіть ID категорії для товару: ");
+    int categoryId = GetIntInput();
+    Category category = dataStorage.Categories.FirstOrDefault(c => c.Id == categoryId);
 
-            if (category == null)
-            {
-                Console.WriteLine("Категорія з таким ID не знайдена.");
-                return;
-            }
+    if (category == null)
+    {
+        Console.WriteLine("Категорія з таким ID не знайдена.");
+        return;
+    }
 
-            Console.Write("Введіть назву товару: ");
-            string name = GetStringInput();
-            Console.Write("Введіть бренд товару: ");
-            string brand = GetStringInput();
-            Console.Write("Введіть ціну товару: ");
-            decimal price = GetDecimalInput();
-            Console.Write("Введіть кількість товару на складі: ");
-            int quantity = GetIntInput();
+    DisplaySuppliers();
+    Console.Write("Введіть ID постачальника для товару: ");
+    int supplierId = GetIntInput();
+    Supplier supplier = dataStorage.Suppliers.FirstOrDefault(s => s.Id == supplierId);
 
-            int nextId = dataStorage.Products.Count > 0 ? dataStorage.Products.Max(p => p.Id) + 1 : 1;
-            try
-            {
-                dataStorage.Products.Add(new Product(nextId, name, brand, price, quantity, category));
-                Console.WriteLine("Товар успішно доданий.");
-            }
-            catch (InvalidQuantityException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            catch (DuplicateProductException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
+    if (supplier == null)
+    {
+        Console.WriteLine("Постачальник з таким ID не знайдений.");
+        return;
+    }
+
+    Console.Write("Введіть назву товару: ");
+    string name = GetStringInput();
+    Console.Write("Введіть бренд товару: ");
+    string brand = GetStringInput();
+    Console.Write("Введіть ціну товару: ");
+    decimal price = GetDecimalInput();
+    Console.Write("Введіть кількість товару на складі: ");
+    int quantity = GetIntInput();
+
+    int nextId = dataStorage.Products.Count > 0 ? dataStorage.Products.Max(p => p.Id) + 1 : 1;
+    try
+    {
+        dataStorage.Products.Add(new Product(nextId, name, brand, price, quantity, category, supplier)); // Додано постачальника
+        Console.WriteLine("Товар успішно доданий.");
+    }
+    catch (InvalidQuantityException ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+    catch (DuplicateProductException ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+}
 
         static void DeleteProduct()
         {
@@ -272,43 +283,56 @@ namespace ConsoleApp
             }
         }
 
-        static void EditProduct()
+static void EditProduct()
+{
+    DisplayProducts();
+    Console.Write("Введіть ID товару для редагування: ");
+    int id = GetIntInput();
+
+    Product productToEdit = dataStorage.Products.FirstOrDefault(p => p.Id == id);
+    if (productToEdit != null)
+    {
+        Console.Write("Введіть нову назву товару: ");
+        string newName = GetStringInput();
+        Console.Write("Введіть новий бренд товару: ");
+        string newBrand = GetStringInput();
+        Console.Write("Введіть нову ціну товару: ");
+        decimal newPrice = GetDecimalInput();
+
+        DisplayCategories();
+        Console.Write("Введіть ID нової категорії для товару: ");
+        int newCategoryId = GetIntInput();
+        Category newCategory = dataStorage.Categories.FirstOrDefault(c => c.Id == newCategoryId);
+
+        if (newCategory == null)
         {
-            DisplayProducts();
-            Console.Write("Введіть ID товару для редагування: ");
-            int id = GetIntInput();
-
-            Product productToEdit = dataStorage.Products.FirstOrDefault(p => p.Id == id);
-            if (productToEdit != null)
-            {
-                Console.Write("Введіть нову назву товару: ");
-                string newName = GetStringInput();
-                Console.Write("Введіть новий бренд товару: ");
-                string newBrand = GetStringInput();
-                Console.Write("Введіть нову ціну товару: ");
-                decimal newPrice = GetDecimalInput();
-                Console.Write("Введіть нову категорію товару: ");
-                int newCategoryId = GetIntInput();
-                Category newCategory = dataStorage.Categories.FirstOrDefault(c => c.Id == newCategoryId);
-
-                if (newCategory == null)
-                {
-                    Console.WriteLine("Категорія з таким ID не знайдена.");
-                    return;
-                }
-
-                productToEdit.Name = newName;
-                productToEdit.Brand = newBrand;
-                productToEdit.Price = newPrice;
-                productToEdit.Category = newCategory;
-                Console.WriteLine("Товар успішно змінений.");
-            }
-            else
-            {
-                Console.WriteLine("Товар з таким ID не знайдений.");
-            }
+            Console.WriteLine("Категорія з таким ID не знайдена.");
+            return;
         }
 
+        DisplaySuppliers(); // Додано запит на введення ID постачальника
+        Console.Write("Введіть ID нового постачальника для товару: ");
+        int newSupplierId = GetIntInput();
+        Supplier newSupplier = dataStorage.Suppliers.FirstOrDefault(s => s.Id == newSupplierId);
+
+        if (newSupplier == null)
+        {
+            Console.WriteLine("Постачальник з таким ID не знайдений.");
+            return;
+        }
+
+        productToEdit.Name = newName;
+        productToEdit.Brand = newBrand;
+        productToEdit.Price = newPrice;
+        productToEdit.Category = newCategory;
+        productToEdit.Supplier = newSupplier; // Додано встановлення постачальника
+        Console.WriteLine("Товар успішно змінений.");
+    }
+    else
+    {
+        Console.WriteLine("Товар з таким ID не знайдений.");
+    }
+}
         static void EditProductQuantity()
         {
             DisplayProducts();
@@ -336,42 +360,43 @@ namespace ConsoleApp
             }
         }
 
-        static void ViewProduct()
-        {
-            DisplayProducts();
-            Console.Write("Введіть ID товару для перегляду: ");
-            int id = GetIntInput();
+      static void ViewProduct()
+{
+    DisplayProducts();
+    Console.Write("Введіть ID товару для перегляду: ");
+    int id = GetIntInput();
 
-            Product productToView = dataStorage.Products.FirstOrDefault(p => p.Id == id);
-            if (productToView != null)
-            {
-                Console.WriteLine($"ID: {productToView.Id}");
-                Console.WriteLine($"Назва: {productToView.Name}");
-                Console.WriteLine($"Бренд: {productToView.Brand}");
-                Console.WriteLine($"Ціна: {productToView.Price}");
-                Console.WriteLine($"Кількість: {productToView.Quantity}");
-                Console.WriteLine($"Категорія: {productToView.Category.Name}");
-            }
-            else
-            {
-                Console.WriteLine("Товар з таким ID не знайдений.");
-            }
-        }
+    Product productToView = dataStorage.Products.FirstOrDefault(p => p.Id == id);
+    if (productToView != null)
+    {
+        Console.WriteLine($"ID: {productToView.Id}");
+        Console.WriteLine($"Назва: {productToView.Name}");
+        Console.WriteLine($"Бренд: {productToView.Brand}");
+        Console.WriteLine($"Ціна: {productToView.Price}");
+        Console.WriteLine($"Кількість: {productToView.Quantity}");
+        Console.WriteLine($"Категорія: {productToView.Category.Name}");
+        Console.WriteLine($"Постачальник: {productToView.Supplier.FirstName} {productToView.Supplier.LastName}"); // Додано вивід постачальника
+    }
+    else
+    {
+        Console.WriteLine("Товар з таким ID не знайдений.");
+    }
+}
 
-        static void DisplayProducts()
-        {
-            if (dataStorage.Products.Count == 0)
-            {
-                Console.WriteLine("Немає товарів для відображення.");
-                return;
-            }
+static void DisplayProducts()
+{
+    if (dataStorage.Products.Count == 0)
+    {
+        Console.WriteLine("Немає товарів для відображення.");
+        return;
+    }
 
-            Console.WriteLine("\nСписок товарів:");
-            foreach (Product product in dataStorage.Products)
-            {
-                Console.WriteLine($"ID: {product.Id}, Назва: {product.Name}, Бренд: {product.Brand}, Ціна: {product.Price}, Кількість: {product.Quantity}, Категорія: {product.Category.Name}");
-            }
-        }
+    Console.WriteLine("\nСписок товарів:");
+    foreach (Product product in dataStorage.Products)
+    {
+        Console.WriteLine($"ID: {product.Id}, Назва: {product.Name}, Бренд: {product.Brand}, Ціна: {product.Price}, Кількість: {product.Quantity}, Категорія: {product.Category.Name}, Постачальник: {product.Supplier.FirstName} {product.Supplier.LastName}"); // Додано вивід постачальника
+    }
+}   
 
         static void ManageSuppliers()
         {
@@ -527,26 +552,68 @@ namespace ConsoleApp
             }
         }
 
-        static void SearchProducts()
+       static void SearchProducts()
+{
+    Console.WriteLine("\nПошук по ключовому слову серед товарів:");
+    Console.WriteLine("1. Пошук по назві або бренду");
+    Console.WriteLine("2. Пошук по постачальнику");
+    Console.WriteLine("3. Повернутися до головного меню");
+
+    Console.Write("Введіть номер пункту: ");
+    int choice = GetIntInput();
+
+    switch (choice)
+    {
+        case 1:
+            SearchProductsByNameOrBrand();
+            break;
+        case 2:
+            SearchProductsBySupplier();
+            break;
+        case 3:
+            return;
+        default:
+            Console.WriteLine("Неправильний вибір. Спробуйте знову.");
+            break;
+    }
+}
+
+static void SearchProductsByNameOrBrand()
+{
+    Console.Write("Введіть ключове слово для пошуку товарів: ");
+    string keyword = GetStringInput();
+
+    var foundProducts = dataStorage.Products.Where(p => p.Name.Contains(keyword) || p.Brand.Contains(keyword));
+
+    DisplaySearchResults(foundProducts);
+}
+
+static void SearchProductsBySupplier()
+{
+    DisplaySuppliers();
+    Console.Write("Введіть ID постачальника: ");
+    int supplierId = GetIntInput();
+
+    var foundProducts = dataStorage.Products.Where(p => p.Supplier.Id == supplierId);
+
+    DisplaySearchResults(foundProducts);
+}
+
+static void DisplaySearchResults(IEnumerable<Product> foundProducts)
+{
+    if (foundProducts.Any())
+    {
+        Console.WriteLine("\nЗнайдені товари:");
+        foreach (Product product in foundProducts)
         {
-            Console.Write("Введіть ключове слово для пошуку товарів: ");
-            string keyword = GetStringInput();
-
-            var foundProducts = dataStorage.Products.Where(p => p.Name.Contains(keyword) || p.Brand.Contains(keyword));
-
-            if (foundProducts.Any())
-            {
-                Console.WriteLine("\nЗнайдені товари:");
-                foreach (Product product in foundProducts)
-                {
-                    Console.WriteLine($"ID: {product.Id}, Назва: {product.Name}, Бренд: {product.Brand}, Ціна: {product.Price}, Кількість: {product.Quantity}, Категорія: {product.Category.Name}");
-                }
-            }
-            else
-            {
-                Console.WriteLine("Товарів за заданим ключовим словом не знайдено.");
-            }
+            Console.WriteLine($"ID: {product.Id}, Назва: {product.Name}, Бренд: {product.Brand}, Ціна: {product.Price}, Кількість: {product.Quantity}, Категорія: {product.Category.Name}, Постачальник: {product.Supplier.FirstName} {product.Supplier.LastName}");
         }
+    }
+    else
+    {
+        Console.WriteLine("Товарів за заданим критерієм не знайдено.");
+    }
+}
 
         static void SearchSuppliers()
         {
