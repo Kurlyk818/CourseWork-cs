@@ -1,0 +1,4 @@
+/home/kurlykqqq/Desktop/CourseWork/GoodsManagement/bin/Release/net6.0/GoodsManagement.dll
+/home/kurlykqqq/Desktop/CourseWork/GoodsManagement/bin/Release/net6.0/GoodsManagement.deps.json
+/home/kurlykqqq/Desktop/CourseWork/GoodsManagement/bin/Release/net6.0/GoodsManagement.pdb
+/home/kurlykqqq/Desktop/CourseWork/GoodsManagement/bin/Release/net6.0/Newtonsoft.Json.dll

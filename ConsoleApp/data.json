@@ -1,0 +1,1 @@
+{"Categories":[{"Id":1,"Name":"Риба"},{"Id":2,"Name":"Молочні продукти"}],"Products":[{"Id":1,"Name":"Скумбрія","Brand":"Ревега","Price":199.0,"Quantity":12,"Category":{"Id":1,"Name":"Риба"}},{"Id":2,"Name":"Карась","Brand":"Ревега","Price":130.99,"Quantity":10,"Category":{"Id":1,"Name":"Риба"}}],"Suppliers":[{"Id":1,"FirstName":"Рибний світ","LastName":"Головач"}]}

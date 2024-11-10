@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "b5yVm165dU91desw2d1JrYhvKBR/azh2Bp80a/+qBkSpzVjoTBQGmCaMvg1dr+6y2yz4+SL0gC4Zgu4/CyOKjg==",
+  "success": true,
+  "projectFilePath": "/home/kurlykqqq/Desktop/CourseWork/GoodsManagement/GoodsManagement.csproj",
+  "expectedPackageFiles": [
+    "/home/kurlykqqq/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
+    "/home/kurlykqqq/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.10/microsoft.aspnetcore.app.ref.8.0.10.nupkg.sha512"
+  ],
+  "logs": []
+}

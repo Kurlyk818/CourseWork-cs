@@ -1,0 +1,12 @@
+/home/kurlykqqq/Desktop/CourseWork/GoodsManagement/obj/Release/net8.0/GoodsManagement.GeneratedMSBuildEditorConfig.editorconfig
+/home/kurlykqqq/Desktop/CourseWork/GoodsManagement/obj/Release/net8.0/GoodsManagement.AssemblyInfoInputs.cache
+/home/kurlykqqq/Desktop/CourseWork/GoodsManagement/obj/Release/net8.0/GoodsManagement.AssemblyInfo.cs
+/home/kurlykqqq/Desktop/CourseWork/GoodsManagement/obj/Release/net8.0/GoodsManagement.csproj.CoreCompileInputs.cache
+/home/kurlykqqq/Desktop/CourseWork/GoodsManagement/bin/Release/net8.0/GoodsManagement.deps.json
+/home/kurlykqqq/Desktop/CourseWork/GoodsManagement/bin/Release/net8.0/GoodsManagement.dll
+/home/kurlykqqq/Desktop/CourseWork/GoodsManagement/bin/Release/net8.0/GoodsManagement.pdb
+/home/kurlykqqq/Desktop/CourseWork/GoodsManagement/obj/Release/net8.0/GoodsManagement.csproj.AssemblyReference.cache
+/home/kurlykqqq/Desktop/CourseWork/GoodsManagement/obj/Release/net8.0/GoodsManagement.dll
+/home/kurlykqqq/Desktop/CourseWork/GoodsManagement/obj/Release/net8.0/refint/GoodsManagement.dll
+/home/kurlykqqq/Desktop/CourseWork/GoodsManagement/obj/Release/net8.0/GoodsManagement.pdb
+/home/kurlykqqq/Desktop/CourseWork/GoodsManagement/obj/Release/net8.0/ref/GoodsManagement.dll
