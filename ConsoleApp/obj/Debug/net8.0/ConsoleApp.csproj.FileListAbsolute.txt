@@ -17,3 +17,4 @@
 /home/kurlykqqq/Desktop/CourseWork/ConsoleApp/obj/Debug/net8.0/ConsoleApp.pdb
 /home/kurlykqqq/Desktop/CourseWork/ConsoleApp/obj/Debug/net8.0/ConsoleApp.genruntimeconfig.cache
 /home/kurlykqqq/Desktop/CourseWork/ConsoleApp/obj/Debug/net8.0/ref/ConsoleApp.dll
+/home/kurlykqqq/Desktop/CourseWork/ConsoleApp/obj/Debug/net8.0/ConsoleApp.sourcelink.json
