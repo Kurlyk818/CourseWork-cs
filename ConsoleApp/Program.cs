@@ -205,7 +205,7 @@ namespace ConsoleApp
                         ViewProduct();
                         break;
                     case 6:
-                        DisplayProducts();
+                        DisplayProductsMenu();
                         break;
                     case 7:
                         return;
@@ -215,6 +215,39 @@ namespace ConsoleApp
                 }
             }
         }
+
+static void DisplayProductsMenu()
+{
+    while (true)
+    {
+        Console.WriteLine("\nПерегляд списку всіх товарів:");
+        Console.WriteLine("1. Відсортувати по назві");
+        Console.WriteLine("2. Відсортувати по бренду");
+        Console.WriteLine("3. Відсортувати по ціні");
+        Console.WriteLine("4. Повернутися до управління товарами");
+
+        Console.Write("Введіть номер пункту: ");
+        int choice = GetIntInput();
+
+        switch (choice)
+        {
+            case 1:
+                DisplayProducts(dataStorage.Products.OrderBy(p => p.Name));
+                break;
+            case 2:
+                DisplayProducts(dataStorage.Products.OrderBy(p => p.Brand));
+                break;
+            case 3:
+                DisplayProducts(dataStorage.Products.OrderBy(p => p.Price));
+                break;
+            case 4:
+                return;
+            default:
+                Console.WriteLine("Неправильний вибір. Спробуйте знову.");
+                break;
+        }
+    }
+}
 
       static void AddProduct()
 {
@@ -267,7 +300,7 @@ namespace ConsoleApp
 
         static void DeleteProduct()
         {
-            DisplayProducts();
+            DisplayProducts(dataStorage.Products);
             Console.Write("Введіть ID товару для видалення: ");
             int id = GetIntInput();
 
@@ -285,7 +318,7 @@ namespace ConsoleApp
 
 static void EditProduct()
 {
-    DisplayProducts();
+    DisplayProducts(dataStorage.Products);
     Console.Write("Введіть ID товару для редагування: ");
     int id = GetIntInput();
 
@@ -335,7 +368,7 @@ static void EditProduct()
 }
         static void EditProductQuantity()
         {
-            DisplayProducts();
+            DisplayProducts(dataStorage.Products);
             Console.Write("Введіть ID товару для зміни кількості: ");
             int id = GetIntInput();
 
@@ -362,7 +395,7 @@ static void EditProduct()
 
       static void ViewProduct()
 {
-    DisplayProducts();
+    DisplayProducts(dataStorage.Products);
     Console.Write("Введіть ID товару для перегляду: ");
     int id = GetIntInput();
 
@@ -383,20 +416,20 @@ static void EditProduct()
     }
 }
 
-static void DisplayProducts()
+static void DisplayProducts(IEnumerable<Product> products) // Змінено параметр
 {
-    if (dataStorage.Products.Count == 0)
+    if (products.Count() == 0)
     {
         Console.WriteLine("Немає товарів для відображення.");
         return;
     }
 
     Console.WriteLine("\nСписок товарів:");
-    foreach (Product product in dataStorage.Products)
+    foreach (Product product in products)
     {
         Console.WriteLine($"ID: {product.Id}, Назва: {product.Name}, Бренд: {product.Brand}, Ціна: {product.Price}, Кількість: {product.Quantity}, Категорія: {product.Category.Name}, Постачальник: {product.Supplier.FirstName} {product.Supplier.LastName}"); // Додано вивід постачальника
     }
-}   
+}
 
         static void ManageSuppliers()
         {
