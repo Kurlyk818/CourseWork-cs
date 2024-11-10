@@ -10,3 +10,4 @@
 /home/kurlykqqq/Desktop/CourseWork/GoodsManagement/obj/Debug/net8.0/refint/GoodsManagement.dll
 /home/kurlykqqq/Desktop/CourseWork/GoodsManagement/obj/Debug/net8.0/GoodsManagement.pdb
 /home/kurlykqqq/Desktop/CourseWork/GoodsManagement/obj/Debug/net8.0/ref/GoodsManagement.dll
+/home/kurlykqqq/Desktop/CourseWork/GoodsManagement/obj/Debug/net8.0/GoodsManagement.sourcelink.json
